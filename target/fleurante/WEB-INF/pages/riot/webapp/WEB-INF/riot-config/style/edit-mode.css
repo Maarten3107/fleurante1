@@ -1,0 +1,13 @@
+/* Styles for the no-image placehoders: */
+
+.riot-noimage {
+	background: url(images/checkerboard_dark.gif);
+	padding: 5px;
+	color: #fff;
+	font-size: 12px;
+}
+.gallery .riot-noimage {
+	width: 100px;
+	height: 100px;
+}
+

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:override="http://www.riotfamily.org/schema/common/override"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util-2.0.xsd
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+		http://www.riotfamily.org/schema/common/override
+		http://www.riotfamily.org/schema/common/override-6.5.xsd">
+
+    <!-- Read placeholders from application.properties  -->
+	<bean id="configurer" class="org.riotfamily.common.beans.config.PlaceholderWithDefaultConfigurer">
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath:/application.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- FixedLocaleResolver to display the Riot user interface in English -->
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.FixedLocaleResolver">
+    	<property name="defaultLocale"><value>en_US</value></property>
+    </bean>
+
+	<!-- Custom color scheme -->
+	<util:properties id="cssProperties">
+		<prop key="highlight">${riot.highlightColor=#cb0038}</prop>
+		<prop key="toolbarOutline">${riot.toolbarOutlineColor=#fff}</prop>
+	</util:properties>
+
+ 	<!--
+ 	  - List of roles available in the 'riotUser' form defined in:
+ 	  - /riot-hibernate/src/org/riotfamily/riot/hibernate/runtime/riot-config.xml
+ 	  -->
+ 	<util:list id="roles">
+		<value>admin</value>
+	</util:list>
+
+</beans>

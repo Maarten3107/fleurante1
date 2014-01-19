@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:component="http://www.riotfamily.org/schema/components/controller"
+	xmlns:generic="http://www.riotfamily.org/schema/website/generic"
+	xmlns:template="http://www.riotfamily.org/schema/website/template"
+	xmlns:txt2img="http://www.riotfamily.org/schema/website/txt2img"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+		http://www.riotfamily.org/schema/components/controller
+		http://www.riotfamily.org/schema/components/controller-6.5.xsd
+		http://www.riotfamily.org/schema/website/template
+		http://www.riotfamily.org/schema/website/template-6.5.xsd
+		http://www.riotfamily.org/schema/website/generic
+		http://www.riotfamily.org/schema/website/generic-6.5.xsd
+		http://www.riotfamily.org/schema/website/txt2img
+		http://www.riotfamily.org/schema/website/txt2img-6.5.xsd">
+
+	<template:definition id="default" view-name="default.ftl">
+		<template:insert slot="header">
+			<generic:view view-name="/inc/topnav.ftl" />
+		</template:insert>
+		<template:insert slot="navigation">
+			<generic:view view-name="/inc/navigation.ftl" />
+		</template:insert>
+		<template:insert slot="content">
+			<component:list valid="paragraph,headline,image,gallery,table"
+					initial="headline,paragraph" />
+		</template:insert>
+		<template:insert slot="extra">
+			<component:list valid="extra-box,inherit" />
+		</template:insert>
+	</template:definition>
+
+	<component:list name="/inc/gallery-components.html"
+			valid="lightbox-image" initial="lightbox-image"	min="1" />
+
+	<txt2img:config>
+		<txt2img:rule selector="h1" font="/WEB-INF/fonts/AUdimat-Bold.ttf" size="30" resample="true" />
+		<txt2img:rule selector="#topnav a" font="/WEB-INF/fonts/AUdimat-Bold.ttf" size="16" resample="true" padding-top="3" />
+		<txt2img:rule selector=".footer .poweredby, .footer .riot" font="/WEB-INF/fonts/AUdimat-Bold.ttf" size="16" resample="true" padding-right="5" />
+		<txt2img:rule selector="h3" font="/WEB-INF/fonts/slkscr.ttf" size="8" anti-alias="false" />
+	</txt2img:config>
+
+</beans>
